@@ -1,0 +1,28 @@
+# Databricks Asset Bundle: deploys the setup job and the pipeline. Works on Databricks Free Edition.
+# Deploy:  databricks bundle validate && databricks bundle deploy -t dev && databricks bundle run patient360_pipeline -t dev
+bundle:
+  name: patient360-lakehouse
+
+variables:
+  catalog: {default: patient360}
+
+targets:
+  dev:
+    mode: development
+    default: true
+    # workspace host comes from your `databricks auth login` profile
+
+resources:
+  pipelines:
+    patient360_pipeline:
+      name: patient360_pipeline
+      catalog: ${var.catalog}
+      schema: silver
+      serverless: true
+      continuous: false
+      libraries:
+        - file: {path: pipeline/01_bronze.sql}
+        - file: {path: pipeline/02_silver.sql}
+        - file: {path: pipeline/03_gold.sql}
+      configuration:
+        landing_path: /Volumes/${var.catalog}/landing/synthea
