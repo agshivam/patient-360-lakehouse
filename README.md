@@ -1,5 +1,7 @@
 # Patient-360 Lakehouse
 
+**Live report:** https://patient-360-lakehouse.streamlit.app/
+
 The [Patient-360](https://github.com/agshivam/patient-360) hospital platform, rebuilt as a lakehouse on **Databricks** (Free Edition is enough). Same synthetic Synthea data, same gold numbers, a different platform, so the trade-offs are measured instead of argued.
 
 ```mermaid
